@@ -18,16 +18,8 @@ public class UnitTest1
         // Assert
     }
 
-    [Fact]
-    [DisplayName("Option_Null")]
+    [Fact(DisplayName ="Option_Null")]
     public void Option_Null()
-    {
-    }
-
-    [InlineData(null)]
-    [Theory]
-    [DisplayName("Option_None")]
-    public void Option_None(string? inputData)
     {
     }
 }

@@ -2,6 +2,10 @@
 
 public class OptionUsage
 {
+    private void FakeMethod1() => Assert.True(true);
+    private void FakeMethod2() => Assert.True(true);
+    private void FakeMethod3() => Assert.True(false);
+
     private bool IsEmail_Original(string email)
     {
         if (string.IsNullOrEmpty(email))
@@ -93,10 +97,6 @@ public class OptionUsage
         return emailOption;
     }
 
-    private void FakeMethod1() => Assert.True(true);
-    private void FakeMethod2() => Assert.True(true);
-    private void FakeMethod3() => Assert.True(false);
-
     [Fact]
     [DisplayName("이후 Null 제어관련 로직이 필요한 경우")]
     public void Method_And_CheckNull()
@@ -110,5 +110,6 @@ public class OptionUsage
             None : FakeMethod3);
 
         IsEmailOut("IsNotEmail").IfNone(() => Assert.True(true));
+        IsEmailOut(null).IfNone(() => Assert.True(true));
     }
 }
