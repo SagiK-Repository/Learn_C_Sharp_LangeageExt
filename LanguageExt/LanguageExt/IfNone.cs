@@ -1,4 +1,4 @@
-﻿namespace LanguageExt;
+﻿namespace LanguageExt_Test;
 
 public class IfNone
 {
