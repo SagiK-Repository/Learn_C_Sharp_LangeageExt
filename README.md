@@ -1,5 +1,7 @@
 문서정보 : 2024.03.05.~03.06. 작성, 작성자 [@SAgiKPJH](https://github.com/SAgiKPJH)
 
+- 요약 - 당장 사용 가능한지 분석한 결과 : [LanguageExt 심화](https://github.com/SagiK-Repository/Learn_C_Sharp_LangeageExt/issues/1)
+
 # Language.Ext
 
 # 🚌Language.Ext?
