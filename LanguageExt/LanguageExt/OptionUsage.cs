@@ -20,6 +20,11 @@ public class OptionUsage
         Optional(nullClass).Match(
             Some: x => "",
             None: () => "isNull").Should().Be("isNull");
+
+        Optional(nullClass)
+            .Some(x => "")
+            .None(() => "isNull")
+            .Should().Be("isNull");
     }
 
 

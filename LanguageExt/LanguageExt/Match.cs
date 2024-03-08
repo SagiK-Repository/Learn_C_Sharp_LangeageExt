@@ -34,6 +34,16 @@ public class Match
     }
 
     [Fact]
+    public void Match_SomeNone()
+    {
+        Option<string> optionString = null;
+
+        optionString
+            .Some(x => FakeMethod1())
+            .None(FakeMethod3);
+    }
+
+    [Fact]
     public void OptionalTest()
     {
         double? nullTemp = null;
