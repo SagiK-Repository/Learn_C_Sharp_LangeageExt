@@ -42,4 +42,24 @@ public class Match
             Some: x => "ss",
             None: () => "").Should().Be("");
     }
+
+    [Fact]
+    public async Task MatchAsyncTest()
+    {
+        // 비동기로 처리될 함수
+        async Task<string> asyncFunction()
+        {
+            await Task.Delay(1000);
+            return "Async Result";
+        }
+
+        Option<string> option = "Test";
+
+        var result = await option.MatchAsync(
+            Some: async str => await asyncFunction(),
+            None: () => Task.FromResult("None Result")
+        );
+
+        result.Should().Be("Async Result");
+    }
 }
