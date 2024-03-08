@@ -2,6 +2,27 @@
 
 public class OptionUsage
 {
+    public string GetStringOrDefault(string value) => Optional(value).IfNone(string.Empty);
+    public string ConvertCelsiusToFahrenheit(double? celsius) => Optional(celsius * 9 / 5 + 32).Match(
+            Some: x => $"{x}°F",
+            None: () => "변환 불가"
+        );
+
+    [Fact]
+    [DisplayName("특정 결과값으로 변환하는 경우")]
+    public void OptionalTest()
+    {
+        GetStringOrDefault(null).Should().Be(string.Empty);
+        ConvertCelsiusToFahrenheit(null).Should().Be("변환 불가");
+        ConvertCelsiusToFahrenheit(100).Should().Be("212°F");
+
+        Match nullClass = null;
+        Optional(nullClass).Match(
+            Some: x => "",
+            None: () => "isNull").Should().Be("isNull");
+    }
+
+
     private void FakeMethod1() => Assert.True(true);
     private void FakeMethod2() => Assert.True(true);
     private void FakeMethod3() => Assert.True(false);
@@ -39,7 +60,7 @@ public class OptionUsage
 
     private bool IsEmail(string email)
     {
-        return Option<string>.Some(email)
+        return Optional(email)
             .Bind(IsEmailHaveAt)
             .Bind(IsHaveDomailDot)
             .Match(
@@ -69,6 +90,11 @@ public class OptionUsage
     [DisplayName("None인 경우와 Some인 경우 처리를 묶어서 처리하는 경우")]
     public void CheckNullMethod()
     {
+        if (IsEmail(null))
+            Assert.True(false);
+        else
+            Assert.True(true);
+
         if (IsEmail("Park@mirero.com"))
             FakeMethod1();
         else
@@ -102,12 +128,12 @@ public class OptionUsage
     public void Method_And_CheckNull()
     {
         IsEmailOut("Park@mirero.com").Match(
-            Some : x =>
+            Some: x =>
             {
                 FakeMethod1();
                 FakeMethod2();
             },
-            None : FakeMethod3);
+            None: FakeMethod3);
 
         IsEmailOut("IsNotEmail").IfNone(() => Assert.True(true));
         IsEmailOut(null).IfNone(() => Assert.True(true));

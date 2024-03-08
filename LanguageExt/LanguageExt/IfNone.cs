@@ -36,9 +36,9 @@ public class IfNone
     {
         string nullString = null;
         Option<string> nullOption = nullString;
-        
+
         nullOption.IfNone("Is Null").Should().Be("Is Null");
-        
+
         GetString(null).IfNone("Is Null").Should().Be("Is Null");
 
         try
@@ -52,5 +52,13 @@ public class IfNone
 
         GetStringOrDefault(null).Should().Be(string.Empty);
         GetStringOrDefault("Test").Should().Be("Test");
+    }
+
+    [Fact]
+    public void OptionalTest()
+    {
+        double? nullTemp = null;
+
+        Optional(nullTemp).IfNone(0).Should().Be(0);
     }
 }

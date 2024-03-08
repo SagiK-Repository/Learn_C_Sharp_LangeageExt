@@ -18,7 +18,7 @@ public class UnitTest1
         // Assert
     }
 
-    [Fact(DisplayName ="Option_Null")]
+    [Fact(DisplayName = "Option_Null")]
     public void Option_Null()
     {
     }
