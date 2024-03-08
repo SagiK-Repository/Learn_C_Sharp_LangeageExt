@@ -61,4 +61,29 @@ public class IfNone
 
         Optional(nullTemp).IfNone(0).Should().Be(0);
     }
+
+    [Fact]
+    public async Task IfNoneAsyncTest()
+    {
+        async Task<int?> asyncReturnTen()
+        {
+            await Task.Delay(1000);
+            return 10;
+        }
+
+        async Task<int?> asyncReturnZero()
+        {
+            await Task.Delay(500);
+            return 0;
+        }
+
+        var someOption = SomeAsync(asyncReturnTen);
+        var noneOption = Option<int?>.None;
+
+        var someResult = await someOption.IfNoneAsync(asyncReturnZero);
+        var noneResult = await noneOption.IfNoneAsync(asyncReturnZero);
+
+        someResult.Should().Be(10);
+        noneResult.Should().Be(0);
+    }
 }
